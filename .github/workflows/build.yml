@@ -27,7 +27,6 @@ jobs:
         
       - id: checkpcfconfig
         run: |
-          Test-Path pcfconfig.json
           echo "::set-output name=exists::$(Test-Path pcfconfig.json)"
           $solutionPath = $('${{ github.repository }}' -replace '${{ github.repository_owner }}/', '' -replace '[^a-zA-Z]', '')
           echo "::set-output name=buildtarget::Solution/$solutionPath"
