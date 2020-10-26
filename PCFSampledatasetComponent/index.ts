@@ -31,10 +31,10 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	 * Called when any value in the property bag has changed. This includes field values, data-sets, global values such as container height and width, offline status, control metadata values such as label, visible, etc.
 	 * @param context The entire property bag available to control via Context Object; It contains values as set up by the customizer mapped to names defined in the manifest, as well as utility functions
 	 */
-	public async updateView(context: ComponentFramework.Context<IInputs>): Promise<void>
+	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
 		// Add code to update control view
-		await this.showDataset( context.parameters.sampleDataSet  );
+		this.showDataset( context.parameters.sampleDataSet  );
 	}
 
 	/** 
@@ -55,21 +55,28 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 		// Add code to cleanup control if necessary
 	}
 
-	private async showDataset( dataSet:ComponentFramework.PropertyTypes.DataSet ) {
+	private showDataset( dataSet:ComponentFramework.PropertyTypes.DataSet ) {
+
+		if( !dataSet ) {
+			console.log( 'DATASET IS NULL!')
+			return
+		}
 
 		const totalRecordCount = dataSet.sortedRecordIds.length;
-		for (let i = 0; i < totalRecordCount; i++) {
+		console.log( `totalRecordCount ${totalRecordCount}`);
 
-			const recordId = dataSet.sortedRecordIds[i];
-			const record = dataSet.records[recordId] as DataSetInterfaces.EntityRecord;
+		// for (let i = 0; i < totalRecordCount; i++) {
+
+		// 	const recordId = dataSet.sortedRecordIds[i];
+		// 	const record = dataSet.records[recordId] as DataSetInterfaces.EntityRecord;
 			
-			console.log( `recordId ${recordId}`);
-			console.dir( record );
+		// 	console.log( `recordId ${recordId}`);
+		// 	console.dir( record );
 
-			const fieldName = record.getValue('name') as string;
-			const fieldData = record.getValue('data') || '';
+		// 	const fieldName = record.getValue('name') as string;	
+		// 	const fieldData = record.getValue('data') || '';
 
-			console.log( `fieldName ${fieldName} - fieldData ${fieldData}`);
-		}
+		// 	console.log( `fieldName ${fieldName} - fieldData ${fieldData}`);
+		// }
 	}
 }
