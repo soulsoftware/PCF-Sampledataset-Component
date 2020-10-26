@@ -7,6 +7,8 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	private _notifyOutputChanged: () => void;
 
 	private _element: HTMLDivElement;
+	private _title: HTMLParagraphElement;
+	private _table: HTMLTableElement;
 	private _update =  0;
 
 	/**
@@ -34,9 +36,15 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 		this._notifyOutputChanged = notifyOutputChanged
 		
 		this._element = document.createElement('div')
-		this._element.style.backgroundColor = 'green'
-		this._element.innerText = `PCFSampledatasetComponent`	
-		
+		this._title = document.createElement('p')
+		this._title.innerText = `PCFSampledatasetComponent`	
+		this._table = document.createElement('table')
+
+		this._element.appendChild( this._title );
+		this._element.appendChild( this._table );
+
+
+		container.style.backgroundColor = 'yellow'
 		container.appendChild( this._element )
 	}
 
@@ -48,10 +56,13 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
 		// Add code to update control view
-		this._element.innerText = `PCFSampledatasetComponent ${++this._update}`
+		this._title.innerText = `PCFSampledatasetComponent ${++this._update}`
 
-		//this.showDataset( context.parameters.sampleDataSet  );
+		if (!context.parameters.sampleDataSet.loading) {
+			this.showDataset( context.parameters.sampleDataSet  );
+		}
 		this._notifyOutputChanged()
+
 	}
 
 	/** 
@@ -79,21 +90,27 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 			return
 		}
 
-		const totalRecordCount = dataSet.sortedRecordIds.length;
-		console.log( `totalRecordCount ${totalRecordCount}`);
+		const trow = document.createElement( 'tr')
+		
+		dataSet.columns.map( c => {
+			let th = document.createElement('th'); 
+			th.innerText = `${c.name}`; 
+			return th
+		}).forEach( c => trow.appendChild(c) )
 
-		// for (let i = 0; i < totalRecordCount; i++) {
+		this._table.appendChild(document.createElement( 'thead').appendChild( trow ).parentElement)
 
-		// 	const recordId = dataSet.sortedRecordIds[i];
-		// 	const record = dataSet.records[recordId] as DataSetInterfaces.EntityRecord;
-			
-		// 	console.log( `recordId ${recordId}`);
-		// 	console.dir( record );
+		const tbody = document.createElement( 'tbody')
 
-		// 	const fieldName = record.getValue('name') as string;	
-		// 	const fieldData = record.getValue('data') || '';
+		const records = dataSet.sortedRecordIds.map( id => {
+			const recordId = dataSet.sortedRecordIds[id];
+			return dataSet.records[recordId] as DataSetInterfaces.EntityRecord;
+		}).forEach( r => {
+			const td = document.createElement('td')
+			td.innerText = r.getRecordId()	
+			tbody.appendChild( document.createElement('tr').appendChild(td).parentElement )
+		})
 
-		// 	console.log( `fieldName ${fieldName} - fieldData ${fieldData}`);
-		// }
+		this._table.appendChild(tbody)
 	}
 }
