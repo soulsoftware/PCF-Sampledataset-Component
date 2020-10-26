@@ -23,7 +23,7 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container:HTMLDivElement)
 	{
 		// Add control initialization code
-		context.parameters.sampleDataSet.
+		
 	}
 
 
