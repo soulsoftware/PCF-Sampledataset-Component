@@ -5,6 +5,10 @@ type DataSet = ComponentFramework.PropertyTypes.DataSet;
 export class PCFSampledatasetComponent implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
 	private _notifyOutputChanged: () => void;
+
+	private _container: HTMLDivElement;
+	private _update =  0;
+
 	/**
 	 * Empty constructor.
 	 */
@@ -26,8 +30,13 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 		// Add control initialization code
 		
 		context.mode.trackContainerResize(true);
-		this._notifyOutputChanged = notifyOutputChanged;			
-		this.showDataset( context.parameters.sampleDataSet  );
+		this._notifyOutputChanged = notifyOutputChanged;	
+		
+		this._container = document.createElement("div");
+		this._container.innerHTML = 
+		`
+		<p>PCFSampledatasetComponent</p>	
+		`
 	}
 
 
@@ -38,7 +47,11 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
 		// Add code to update control view
-		this.showDataset( context.parameters.sampleDataSet  );
+		this._container.innerHTML = 
+		`
+		<p>PCFSampledatasetComponent ${++this._update}</p>	
+		`
+		//this.showDataset( context.parameters.sampleDataSet  );
 		this._notifyOutputChanged()
 	}
 
