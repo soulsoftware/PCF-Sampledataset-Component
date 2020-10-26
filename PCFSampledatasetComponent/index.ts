@@ -92,7 +92,7 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 		const trow = document.createElement( 'tr')
 		
-		dataSet.columns.map( c => {
+		dataSet.columns.map( (c,i) => {
 			let th = document.createElement('th'); 
 			th.innerText = `${c.name}`; 
 			return th
@@ -103,8 +103,8 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 		const tbody = document.createElement( 'tbody')
 
-		const records = dataSet.sortedRecordIds.map( id => {
-			const recordId = dataSet.sortedRecordIds[id];
+		const records = dataSet.sortedRecordIds.map( (id,i) => {
+			const recordId = dataSet.sortedRecordIds[i];
 			return dataSet.records[recordId] as DataSetInterfaces.EntityRecord;
 		}).forEach( r => {
 			const td = document.createElement('td')
