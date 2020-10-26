@@ -98,7 +98,8 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 			return th
 		}).forEach( c => trow.appendChild(c) )
 
-		this._table.appendChild(document.createElement( 'thead').appendChild( trow ).parentElement)
+		const thead = document.createElement( 'thead'); thead.appendChild( trow )
+		this._table.appendChild(thead)
 
 		const tbody = document.createElement( 'tbody')
 
@@ -108,7 +109,9 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 		}).forEach( r => {
 			const td = document.createElement('td')
 			td.innerText = r.getRecordId()	
-			tbody.appendChild( document.createElement('tr').appendChild(td).parentElement )
+
+			const tr =  document.createElement('tr'); tr.appendChild(td)
+			tbody.appendChild( tr )
 		})
 
 		this._table.appendChild(tbody)
