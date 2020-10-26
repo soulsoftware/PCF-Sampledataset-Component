@@ -4,6 +4,7 @@ type DataSet = ComponentFramework.PropertyTypes.DataSet;
 
 export class PCFSampledatasetComponent implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
+	private _notifyOutputChanged: () => void;
 	/**
 	 * Empty constructor.
 	 */
@@ -24,6 +25,9 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	{
 		// Add control initialization code
 		
+		context.mode.trackContainerResize(true);
+		this._notifyOutputChanged = notifyOutputChanged;			
+		this.showDataset( context.parameters.sampleDataSet  );
 	}
 
 
@@ -35,6 +39,7 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	{
 		// Add code to update control view
 		this.showDataset( context.parameters.sampleDataSet  );
+		this._notifyOutputChanged()
 	}
 
 	/** 
