@@ -29,15 +29,14 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	{
 		// Add control initialization code
 		
-		context.mode.trackContainerResize(true);
-		this._notifyOutputChanged = notifyOutputChanged;	
-		
-		this._element = document.createElement("div");
-		this._element.innerHTML = 
-		`
-		<p>PCFSampledatasetComponent</p>	
-		`
+		context.mode.trackContainerResize(true)
 
+		this._notifyOutputChanged = notifyOutputChanged
+		
+		this._element = document.createElement('div')
+		this._element.style.backgroundColor = 'green'
+		this._element.innerText = `PCFSampledatasetComponent`	
+		
 		container.appendChild( this._element )
 	}
 
@@ -49,10 +48,8 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
 		// Add code to update control view
-		this._element.innerHTML = 
-		`
-		<p>PCFSampledatasetComponent ${++this._update}</p>	
-		`
+		this._element.innerText = `PCFSampledatasetComponent ${++this._update}`
+
 		//this.showDataset( context.parameters.sampleDataSet  );
 		this._notifyOutputChanged()
 	}
