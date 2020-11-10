@@ -38,7 +38,7 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 		this._notifyOutputChanged = notifyOutputChanged
 		
-		this._element = document.createElement( 'div ')
+		this._element = document.createElement( 'div')
 
 		this._content = this._element.appendChild( initialContent() )		
 
