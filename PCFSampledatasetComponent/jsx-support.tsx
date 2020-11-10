@@ -56,6 +56,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
 
   export const initialContent = () =>  
     <div>
+      <h2>TSX</h2>
       <p>PCFSampledatasetComponent</p>
       <table>
 
