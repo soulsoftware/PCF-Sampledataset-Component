@@ -9,7 +9,7 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 	private _notifyOutputChanged: () => void;
 
-	private _element: HTMLElement;
+	private _container: HTMLElement;
 	private _content: HTMLElement;
 
 	private _update =  0;
@@ -38,12 +38,10 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 		this._notifyOutputChanged = notifyOutputChanged
 		
-		this._element = document.createElement( 'div' )
+		this._container = container
+		this._container.style.backgroundColor = 'yellow'
 
-		this._content = this._element.appendChild( initialContent() )		
-
-		container.style.backgroundColor = 'yellow'
-		container.appendChild( this._element )
+		this._content = this._container.appendChild( initialContent() )		
 	}
 
 
@@ -57,7 +55,7 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 		this._content  =  updatedContent( { update:++this._update, dataSet:context.parameters.sampleDataSet} )
 
-		this._element.replaceChild( this._content, oldNode )
+		this._container.replaceChild( this._content, oldNode )
 
 		// if (!context.parameters.sampleDataSet.loading) {
 		// 	this.updateDataset( context.parameters.sampleDataSet  );

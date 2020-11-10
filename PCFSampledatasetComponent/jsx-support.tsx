@@ -83,7 +83,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
           <tr>
             <th>ID</th>
             {
-              ds.columns.map( (c,i) => <th>`${i} | ${c.displayName}`</th> )
+              ds.columns.map( (c,i) => <th>{`${i} | ${c.displayName}`}</th> )
             }
           </tr>
           </thead>
