@@ -2,10 +2,8 @@ import {IInputs, IOutputs} from "./generated/ManifestTypes";
 import DataSetInterfaces = ComponentFramework.PropertyHelper.DataSetApi;
 type DataSet = ComponentFramework.PropertyTypes.DataSet;
 
-import  './jsx-decl'
-
 /** @jsx createElement */
-import { createElement } from './jsx-support'
+import { initialContent, updatedContent } from './jsx-support'
 	
 export class PCFSampledatasetComponent implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
@@ -42,16 +40,9 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 		this._notifyOutputChanged = notifyOutputChanged
 		
-		this._element = <div></div>
+		this._element = document.createElement( 'div ')
 
-		this._content = this._element.appendChild( 			
-			<div>
-				<p>PCFSampledatasetComponent</p>
-				<table>
-
-				</table>
-			</div> 
-		);
+		this._content = this._element.appendChild( initialContent() )		
 
 		container.style.backgroundColor = 'yellow'
 		container.appendChild( this._element )
@@ -66,10 +57,7 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	{
 		const oldNode = this._content 
 
-		this._content  =  
-			<div>
-				<p>PCFSampledatasetComponent {++this._update}</p>
-			</div>
+		this._content  =  updatedContent( ++this._update )
 
 		this._element.replaceChild( this._content, oldNode )
 

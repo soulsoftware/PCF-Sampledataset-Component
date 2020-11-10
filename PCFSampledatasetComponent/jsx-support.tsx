@@ -1,3 +1,4 @@
+
 type Props = any
 type Children = Array<Node>
 type Listener = ( ev:any ) => void 
@@ -9,7 +10,7 @@ type Tag = string | (( props: Props|null, ...children: Children ) => any)
  * @param props 
  * @param children 
  */
-export function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement {
+function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement {
 
     if (typeof tag === "function") return tag(props, ...children);
     
@@ -44,7 +45,24 @@ export function createElement(tag:Tag, props: Props, ...children: Children):HTML
    * @param props 
    * @param children 
    */
-  export const createFragment = (props: Props|null, ...children: Children) => {
+  const createFragment = (props: Props|null, ...children: Children) => {
     return children;
   };
   
+  //
+  //
+  //
+
+  export const initialContent = () =>  
+    <div>
+      <p>PCFSampledatasetComponent</p>
+      <table>
+
+      </table>
+    </div> 
+  
+  export const updatedContent = ( update:number )  =>  
+    <div>
+      <p>PCFSampledatasetComponent {++update}</p>
+    </div>
+
