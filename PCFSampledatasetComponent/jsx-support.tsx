@@ -25,19 +25,17 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
         element.setAttribute(name, String(value))
     });
   
-    children.forEach(child => {
-      appendChild(element, child);
-    });
-  
+    children.forEach(child => appendChild(element, child) );
+     
     return element;
   };
   
   const appendChild = (parent:Node, child:Array<Node>|Node|string) => {
     if (Array.isArray(child))
         child.forEach(nestedChild => appendChild(parent, nestedChild))
-    else if( child === 'string' ) 
+    else if( typeof child === 'string' ) 
         parent.appendChild(document.createTextNode(child))
-    else 
+    else if( typeof child === 'object')
         parent.appendChild(child as Node);
   };
   
