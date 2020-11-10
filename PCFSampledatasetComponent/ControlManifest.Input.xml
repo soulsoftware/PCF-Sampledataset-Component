@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="soulsoftware.PCF.Components" constructor="PCFSampledatasetComponent" version="1.5.7" display-name-key="PCFSampledatasetComponent" description-key="PCFSampledatasetComponent description" control-type="standard">
+  <control namespace="soulsoftware.PCF.Components" constructor="PCFSampledatasetComponent" version="1.5.8" display-name-key="PCFSampledatasetComponent" description-key="PCFSampledatasetComponent description" control-type="standard">
     <!-- dataset node represents a set of entity records on CDS; allow more than one datasets -->
     <data-set name="sampleDataSet" display-name-key="Sample_Dataset_Key">
       <!-- 'property-set' node represents a unique, configurable property that each record in the dataset must provide. -->
+      <!-- UNCOMMENT TO ADD PROPERTY-SET NODE
       <property-set name="name" display-name-key="Property_Name_Key" description-key="name property" of-type="SingleLine.Text" usage="bound" required="true"/>
       <property-set name="value" display-name-key="Property_Value_Key" description-key="value property" of-type="SingleLine.Text" usage="bound" required="true"/>
-      <!-- UNCOMMENT TO ADD PROPERTY-SET NODE
       -->
     </data-set>
     <resources>
