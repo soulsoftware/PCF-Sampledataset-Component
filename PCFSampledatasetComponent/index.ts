@@ -57,13 +57,13 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	{
 		const oldNode = this._content 
 
-		this._content  =  updatedContent( ++this._update )
+		this._content  =  updatedContent( { update:++this._update, dataSet:context.parameters.sampleDataSet} )
 
 		this._element.replaceChild( this._content, oldNode )
 
-		if (!context.parameters.sampleDataSet.loading) {
-			this.updateDataset( context.parameters.sampleDataSet  );
-		}
+		// if (!context.parameters.sampleDataSet.loading) {
+		// 	this.updateDataset( context.parameters.sampleDataSet  );
+		// }
 		this._notifyOutputChanged()
 
 	}

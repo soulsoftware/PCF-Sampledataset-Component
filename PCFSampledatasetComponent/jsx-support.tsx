@@ -1,3 +1,4 @@
+import DataSetInterfaces = ComponentFramework.PropertyHelper.DataSetApi;
 
 type Props = any
 type Children = Array<Node>
@@ -61,8 +62,56 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
       </table>
     </div> 
   
-  export const updatedContent = ( update:number )  =>  
-    <div>
-      <p>PCFSampledatasetComponent {++update}</p>
-    </div>
+  export const updatedContent = ( params:{ update:number, dataSet:ComponentFramework.PropertyTypes.DataSet } )  => {
+
+    let drawTableContent
+
+    if( !params.dataSet ) {
+
+      drawTableContent = () =>  
+        <table>
+          <tr>                  
+            <td>NO DATA PRESENT!</td>
+          </tr>
+        </table>
+    }
+    else {
+      const ds = params.dataSet
+
+      drawTableContent = () =>  
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            {
+              ds.columns.map( (c,i) => <th>`${i} | ${c.displayName}`</th> )
+            }
+          </tr>
+          </thead>
+          <tbody>
+            {
+              ds.sortedRecordIds.map( (id,i) => {
+                const recordId = ds.sortedRecordIds[i];
+                return ds.records[recordId] as DataSetInterfaces.EntityRecord;
+              }).map( r => 
+                <tr>
+                  <td>{r.getRecordId()}</td>
+                  {
+                    ds.columns
+                      .filter( c => c.name !== undefined )
+                      .map( c => <td>{String(r.getValue(c.name))}</td> )
+                  }
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
+    }
+
+    return   <div>
+              <h2>TSX</h2>
+              <p>PCFSampledatasetComponent {++params.update}</p>         
+              { drawTableContent() }
+            </div>
+  }
 
