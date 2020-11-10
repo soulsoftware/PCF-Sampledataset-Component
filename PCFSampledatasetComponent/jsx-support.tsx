@@ -81,9 +81,9 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
         <table>
           <thead>
           <tr>
-            <th>ID</th>
+            <th>ID |</th>
             {
-              ds.columns.map( (c,i) => <th>{`${i} | ${c.displayName}`}</th> )
+              ds.columns.map( (c,i) => <th>{`${c.displayName} |`}</th> )
             }
           </tr>
           </thead>
@@ -98,7 +98,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
                   {
                     ds.columns
                       .filter( c => c.name !== undefined )
-                      .map( c => <td>{String(r.getValue(c.name))}</td> )
+                      .map( c => <td>{ r.getValue(c.name) }</td> )
                   }
                 </tr>
               )
