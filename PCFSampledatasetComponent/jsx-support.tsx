@@ -79,7 +79,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
 
       drawTableContent = () =>  
         <table>
-          <caption>{ `[ ${ds.getTargetEntityType} ]` }</caption>
+          <caption>{ `[ ${ds.getTargetEntityType() } ]` }</caption>
           <thead>
           <tr>
             <th>ID |</th>
