@@ -109,7 +109,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
 
     return   <div>
               <h2>TSX</h2>
-              <p>PCFSampledatasetComponent {++params.update}</p>         
+              <p>{ `PCFSampledatasetComponent ${params.update}` }</p>         
               { drawTableContent() }
             </div>
   }
