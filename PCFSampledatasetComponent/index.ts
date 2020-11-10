@@ -12,8 +12,6 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	private _element: HTMLElement;
 	private _content: HTMLElement;
 
-	// private _title: HTMLParagraphElement;
-	// private _table: HTMLTableElement;
 	private _update =  0;
 
 	/**
@@ -85,6 +83,9 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	{
 		// Add code to cleanup control if necessary
 	}
+
+	// private _title: HTMLParagraphElement;
+	// private _table: HTMLTableElement;
 
 	// private clearTable() {
 	// 	while (this._table.firstChild) {
