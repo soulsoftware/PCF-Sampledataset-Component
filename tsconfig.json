@@ -2,5 +2,12 @@
     "extends": "./node_modules/pcf-scripts/tsconfig_base.json",
     "compilerOptions": {
         "typeRoots": ["node_modules/@types"],
+        "types" : [ 
+            "node",
+            "powerapps-component-framework"
+        ],
+        "jsx": "react",
+        "jsxFactory": "createElement",            
     }
+
 }

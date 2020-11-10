@@ -2,11 +2,18 @@ import {IInputs, IOutputs} from "./generated/ManifestTypes";
 import DataSetInterfaces = ComponentFramework.PropertyHelper.DataSetApi;
 type DataSet = ComponentFramework.PropertyTypes.DataSet;
 
+import  './jsx-decl'
+
+/** @jsx createElement */
+import { createElement } from './jsx-support'
+	
 export class PCFSampledatasetComponent implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
 	private _notifyOutputChanged: () => void;
 
-	private _element: HTMLDivElement;
+	private _element: HTMLElement;
+	private _content: HTMLElement;
+
 	private _title: HTMLParagraphElement;
 	private _table: HTMLTableElement;
 	private _update =  0;
@@ -35,14 +42,16 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 		this._notifyOutputChanged = notifyOutputChanged
 		
-		this._element = document.createElement('div')
-		this._title = document.createElement('p')
-		this._title.innerText = `PCFSampledatasetComponent`	
-		this._table = document.createElement('table')
+		this._element = <div></div>
 
-		this._element.appendChild( this._title );
-		this._element.appendChild( this._table );
+		this._content = this._element.appendChild( 			
+			<div>
+				<p>PCFSampledatasetComponent</p>
+				<table>
 
+				</table>
+			</div> 
+		);
 
 		container.style.backgroundColor = 'yellow'
 		container.appendChild( this._element )
@@ -55,8 +64,14 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	 */
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
-		// Add code to update control view
-		this._title.innerText = `PCFSampledatasetComponent ${++this._update}`
+		const oldNode = this._content 
+
+		this._content  =  
+			<div>
+				<p>PCFSampledatasetComponent {++this._update}</p>
+			</div>
+
+		this._element.replaceChild( this._content, oldNode )
 
 		if (!context.parameters.sampleDataSet.loading) {
 			this.updateDataset( context.parameters.sampleDataSet  );
