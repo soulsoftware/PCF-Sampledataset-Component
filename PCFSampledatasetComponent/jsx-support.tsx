@@ -66,11 +66,18 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
     let drawTableContent
 
     if( !params.dataSet ) {
-
       drawTableContent = () =>  
         <table>
           <tr>                  
             <td>NO DATA PRESENT!</td>
+          </tr>
+        </table>
+    }
+    else if( params.dataSet.loading) {
+      drawTableContent = () =>  
+        <table>
+          <tr>                  
+            <td>LOADING!</td>
           </tr>
         </table>
     }
@@ -99,7 +106,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
                   {
                     ds.columns
                       //.filter( c => c.name !== undefined )
-                      .map( c => <td>{ `${r.getValue(c.name)}` }</td> )
+                      .map( c => <td>{ `${r.getFormattedValue(c.name)}` }</td> )
                       //.map( c => <td>{ `[${c.name}]` }</td> )
                     }
                 </tr>
