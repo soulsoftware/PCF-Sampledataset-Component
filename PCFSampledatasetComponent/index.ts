@@ -4,7 +4,11 @@ type DataSet = ComponentFramework.PropertyTypes.DataSet;
 
 /** @jsx createElement */
 import { initialContent, updatedContent } from './jsx-support'
-	
+
+/**
+ * PCFSampledatasetComponent
+ * 
+ */
 export class PCFSampledatasetComponent implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
 	private _notifyOutputChanged: () => void;

@@ -79,7 +79,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
 
       drawTableContent = () =>  
         <table>
-          <caption>{ `[ ${ds.getTargetEntityType() } ]` }</caption>
+          <caption>{ `Entity Type: [ ${ds.getTargetEntityType() } ]` }</caption>
           <thead>
           <tr>
             <th>ID |</th>
@@ -99,7 +99,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
                   {
                     ds.columns
                       //.filter( c => c.name !== undefined )
-                      .map( c => <td>{ `${r.getValue(c.displayName)}` }</td> )
+                      .map( c => <td>{ `${r.getValue(c.name)}` }</td> )
                       //.map( c => <td>{ `[${c.name}]` }</td> )
                     }
                 </tr>
