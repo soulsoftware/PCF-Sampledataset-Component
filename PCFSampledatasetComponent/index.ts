@@ -4,12 +4,16 @@ type DataSet = ComponentFramework.PropertyTypes.DataSet;
 
 /** @jsx createElement */
 import { initialContent, updatedContent } from './jsx-support'
-	
+
+/**
+ * PCFSampledatasetComponent
+ * 
+ */
 export class PCFSampledatasetComponent implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
 	private _notifyOutputChanged: () => void;
 
-	private _element: HTMLElement;
+	private _container: HTMLElement;
 	private _content: HTMLElement;
 
 	private _update =  0;
@@ -38,12 +42,14 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 
 		this._notifyOutputChanged = notifyOutputChanged
 		
-		this._element = document.createElement( 'div')
+		this._container = container
+		this._container.style.backgroundColor = 'yellow'
 
-		this._content = this._element.appendChild( initialContent() )		
+		this._content = this._container.appendChild( initialContent() )		
 
-		container.style.backgroundColor = 'yellow'
-		container.appendChild( this._element )
+		      
+		console.dir( context.parameters.sampleDataSet, { depth:5 } );
+
 	}
 
 
@@ -53,15 +59,13 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 	 */
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
+		
 		const oldNode = this._content 
 
 		this._content  =  updatedContent( { update:++this._update, dataSet:context.parameters.sampleDataSet} )
 
-		this._element.replaceChild( this._content, oldNode )
+		this._container.replaceChild( this._content, oldNode )
 
-		// if (!context.parameters.sampleDataSet.loading) {
-		// 	this.updateDataset( context.parameters.sampleDataSet  );
-		// }
 		this._notifyOutputChanged()
 
 	}
@@ -84,65 +88,4 @@ export class PCFSampledatasetComponent implements ComponentFramework.StandardCon
 		// Add code to cleanup control if necessary
 	}
 
-	// private _title: HTMLParagraphElement;
-	// private _table: HTMLTableElement;
-
-	// private clearTable() {
-	// 	while (this._table.firstChild) {
-	// 		this._table.removeChild(this._table.firstChild);
-	// 	}
-	// }
-	// private updateDataset( dataSet:ComponentFramework.PropertyTypes.DataSet ) {
-
-	// 	if( !dataSet ) {
-	// 		console.log( 'DATASET IS NULL!')
-	// 		return
-	// 	}
-
-	// 	this.clearTable()
-
-	// 	const TAG = <K extends keyof HTMLElementTagNameMap>(tagName:K) => 
-	// 		(text:string) => {
-	// 			let th = document.createElement(tagName); 
-	// 			th.innerText = text; 
-	// 			return th
-	// 		}
-		
-	// 	const TH = TAG('th')
-	// 	const TD = TAG('td')
-
-	// 	//
-	// 	// TABLE HEADER
-	// 	//
-	// 	const trow = document.createElement( 'tr')	
-
-	// 	trow.appendChild( TH('ID') )
-
-	// 	dataSet.columns.map( (c,i) => TH( `${i} | ${c.displayName}`)).forEach( c => trow.appendChild(c) )
-
-	// 	const thead = document.createElement( 'thead'); thead.appendChild( trow )
-	// 	this._table.appendChild(thead)
-
-	// 	//
-	// 	// TABLE BODY
-	// 	//
-	// 	const tbody = document.createElement( 'tbody')
-
-	// 	const records = dataSet.sortedRecordIds.map( (id,i) => {
-	// 		const recordId = dataSet.sortedRecordIds[i];
-	// 		return dataSet.records[recordId] as DataSetInterfaces.EntityRecord;
-	// 	}).forEach( r => {
-	// 		const tr =  document.createElement('tr'); 
-
-	// 		tr.appendChild(TD( r.getRecordId() ))
-			
-	// 		dataSet.columns.filter( c => c.name !== undefined ).forEach( c =>			
-	// 			tr.appendChild( TD( String(r.getValue(c.name)) ) )
-	// 		)
-
-	// 		tbody.appendChild( tr )
-	// 	})
-
-	// 	this._table.appendChild(tbody)
-	// }
 }

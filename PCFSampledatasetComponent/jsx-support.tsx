@@ -66,11 +66,18 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
     let drawTableContent
 
     if( !params.dataSet ) {
-
       drawTableContent = () =>  
         <table>
           <tr>                  
             <td>NO DATA PRESENT!</td>
+          </tr>
+        </table>
+    }
+    else if( params.dataSet.loading) {
+      drawTableContent = () =>  
+        <table>
+          <tr>                  
+            <td>LOADING!</td>
           </tr>
         </table>
     }
@@ -79,11 +86,12 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
 
       drawTableContent = () =>  
         <table>
+          <caption>{ `Entity Type: [ ${ds.getTargetEntityType() } ]` }</caption>
           <thead>
           <tr>
-            <th>ID</th>
+            <th>ID |</th>
             {
-              ds.columns.map( (c,i) => <th>`${i} | ${c.displayName}`</th> )
+              ds.columns.map( (c,i) => <th>{`${c.displayName} |`}</th> )
             }
           </tr>
           </thead>
@@ -97,9 +105,10 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
                   <td>{r.getRecordId()}</td>
                   {
                     ds.columns
-                      .filter( c => c.name !== undefined )
-                      .map( c => <td>{String(r.getValue(c.name))}</td> )
-                  }
+                      //.filter( c => c.name !== undefined )
+                      .map( c => <td>{ `${r.getFormattedValue(c.name)}` }</td> )
+                      //.map( c => <td>{ `[${c.name}]` }</td> )
+                    }
                 </tr>
               )
             }
@@ -109,7 +118,7 @@ function createElement(tag:Tag, props: Props, ...children: Children):HTMLElement
 
     return   <div>
               <h2>TSX</h2>
-              <p>PCFSampledatasetComponent {++params.update}</p>         
+              <p>{ `PCFSampledatasetComponent ${params.update}` }</p>         
               { drawTableContent() }
             </div>
   }
