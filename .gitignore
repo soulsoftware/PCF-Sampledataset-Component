@@ -15,7 +15,6 @@
 /Microsoft.PowerApps.CLI*
 /System.ComponentModel.Composition*
 
-# parceljs
-
+#parcel 
 dist/
 .cache/
